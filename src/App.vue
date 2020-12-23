@@ -1,17 +1,26 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="app">
+    <div ref="editor"></div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ClassicEditor from "./editor";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "App",
+  async mounted() {
+    console.log(this.$refs.editor);
+    let editor = await ClassicEditor.create(this.$refs.editor, {
+      toolbar: {
+        items: ["bold", "italic"],
+        viewportTopOffset: 30,
+        shouldNotGroupWhenFull: true,
+      },
+    });
+    console.log(editor);
+  },
+};
 </script>
 
 <style>
